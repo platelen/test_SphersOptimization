@@ -23,21 +23,15 @@ namespace Spawn
         [SerializeField] private float _centerZ = 0f;
         [SerializeField] private float _avoidRadius = 2f;
 
+
         private List<GameObject> _spheres = new List<GameObject>();
+
+        public List<GameObject> Spheres => _spheres;
 
         private void Awake()
         {
             SpawnedSpheres();
             SpawnedCubes();
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(new Vector3(_centerX, 0f, _centerZ), _radius);
-
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(new Vector3(_centerX, 0f, _centerZ), _avoidRadius);
         }
 
         private void SpawnedSpheres()
@@ -48,9 +42,10 @@ namespace Spawn
             {
                 float angle = i * angleInterval * Mathf.Deg2Rad;
                 Vector3 spawnPosition = GetPointOnCircle(_radius, angle, _centerX, _centerZ);
-                Instantiate(_spherePrefab, spawnPosition, Quaternion.identity, _spawnParent.transform);
+                GameObject sphere = Instantiate(_spherePrefab, spawnPosition, Quaternion.identity,
+                    _spawnParent.transform);
 
-                _spheres.Add(_spherePrefab);
+                _spheres.Add(sphere);
             }
 
             foreach (var spheres in _spheres)
@@ -74,6 +69,15 @@ namespace Spawn
 
             Quaternion rotationRed = _transformRed.rotation * Quaternion.Euler(0f, 180f, 0f);
             Instantiate(_cubeRed, _transformRed.position, rotationRed, _spawnParent.transform);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(new Vector3(_centerX, 0f, _centerZ), _radius);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(new Vector3(_centerX, 0f, _centerZ), _avoidRadius);
         }
     }
 }

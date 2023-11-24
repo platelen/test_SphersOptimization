@@ -845,7 +845,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05ac82999b74965a42d2cc51ea4ec1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnFigures: {fileID: 1185218418}
   _moveCubesManager: {fileID: 1185218420}
+  _activatedSphere: 5
+  _loadNextScene: 0
 --- !u!114 &1185218422
 MonoBehaviour:
   m_ObjectHideFlags: 0
