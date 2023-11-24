@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Spawn
@@ -21,6 +22,8 @@ namespace Spawn
         [SerializeField] private float _centerX = 0f;
         [SerializeField] private float _centerZ = 0f;
         [SerializeField] private float _avoidRadius = 2f;
+
+        private List<GameObject> _spheres = new List<GameObject>();
 
         private void Start()
         {
@@ -46,6 +49,13 @@ namespace Spawn
                 float angle = i * angleInterval * Mathf.Deg2Rad;
                 Vector3 spawnPosition = GetPointOnCircle(_radius, angle, _centerX, _centerZ);
                 Instantiate(_spherePrefab, spawnPosition, Quaternion.identity, _spawnParent.transform);
+
+                _spheres.Add(_spherePrefab);
+            }
+
+            foreach (var spheres in _spheres)
+            {
+                spheres.SetActive(false);
             }
         }
 
