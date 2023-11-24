@@ -25,7 +25,7 @@ namespace Spawn
 
         private List<GameObject> _spheres = new List<GameObject>();
 
-        private void Start()
+        private void Awake()
         {
             SpawnedSpheres();
             SpawnedCubes();
