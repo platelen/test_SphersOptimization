@@ -145,6 +145,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FIreEx
       objectReference: {fileID: 0}
+    - target: {fileID: 3451533952945783992, guid: a71da2b0f68ccd844b92e153ef3f4555, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.18039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451533952945783992, guid: a71da2b0f68ccd844b92e153ef3f4555, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.14901961
+      objectReference: {fileID: 0}
     - target: {fileID: 7793983239291234920, guid: a71da2b0f68ccd844b92e153ef3f4555, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

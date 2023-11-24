@@ -69,9 +69,11 @@ namespace Spawn
 
         private void SpawnedCubes()
         {
-            var rotation = transform.rotation;
-            Instantiate(_cubeGreen, _transformGreen.position, rotation, _spawnParent.transform);
-            Instantiate(_cubeRed, _transformRed.position, rotation, _spawnParent.transform);
+            Quaternion rotationGreen = _transformGreen.rotation;
+            Instantiate(_cubeGreen, _transformGreen.position, rotationGreen, _spawnParent.transform);
+
+            Quaternion rotationRed = _transformRed.rotation * Quaternion.Euler(0f, 180f, 0f);
+            Instantiate(_cubeRed, _transformRed.position, rotationRed, _spawnParent.transform);
         }
     }
 }
