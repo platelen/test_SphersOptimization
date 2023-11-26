@@ -848,7 +848,7 @@ MonoBehaviour:
   _spawnFigures: {fileID: 1185218418}
   _moveCubesManager: {fileID: 1185218420}
   _activatedSphere: 5
-  _loadNextScene: 0
+  _loadNextScene: 1
 --- !u!114 &1185218422
 MonoBehaviour:
   m_ObjectHideFlags: 0

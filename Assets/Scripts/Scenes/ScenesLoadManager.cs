@@ -1,6 +1,7 @@
 using Cubs;
 using Spawn;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Scenes
 {
@@ -14,6 +15,7 @@ namespace Scenes
         private void Update()
         {
             EnabledDisabledSphere();
+            SwitchedScene();
         }
 
         private void EnabledDisabledSphere()
@@ -31,6 +33,14 @@ namespace Scenes
                 {
                     sphere.SetActive(false);
                 }
+            }
+        }
+
+        private void SwitchedScene()
+        {
+            if (_moveCubesManager.DistanceCubes < _loadNextScene)
+            {
+                SceneManager.LoadScene("Particles");
             }
         }
     }
