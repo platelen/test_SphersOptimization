@@ -5,73 +5,72 @@ namespace ParticlessControll
     [RequireComponent(typeof(ParticleSystem))]
     public class ConstrainParticlesToSphere : MonoBehaviour
     {
-        public Vector3 sphereCenter = Vector3.zero;
-        public float sphereRadius = 5.0f;
-        public float repulsionForce = 1.0f;
-        public int maxParticles = 1000; // Новый параметр: количество частиц
+        [SerializeField] private Vector3 _sphereCenter = Vector3.zero;
+        [SerializeField] private float _sphereRadius = 5.0f;
+        [SerializeField] private float _repulsionForce = 1.0f;
+        [SerializeField] private int _maxParticles = 1000;
 
-        private ParticleSystem particles;
+        private ParticleSystem _particles;
 
-        void Start()
+        private void Start()
         {
-            particles = GetComponent<ParticleSystem>();
-            particles.maxParticles = maxParticles;
-            ParticleSystem.EmissionModule emission = particles.emission;
+            _particles = GetComponent<ParticleSystem>();
+            _particles.maxParticles = _maxParticles;
+            ParticleSystem.EmissionModule emission = _particles.emission;
             emission.rateOverTime =
-                maxParticles; // Установка начальной скорости эмиссии равной максимальному количеству частиц
+                _maxParticles;
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             ConstrainParticles();
             ApplyRepulsion();
         }
 
-        void ConstrainParticles()
+        private void ConstrainParticles()
         {
-            ParticleSystem.Particle[] allParticles = new ParticleSystem.Particle[particles.particleCount];
-            int numParticlesAlive = particles.GetParticles(allParticles);
+            ParticleSystem.Particle[] allParticles = new ParticleSystem.Particle[_particles.particleCount];
+            int numParticlesAlive = _particles.GetParticles(allParticles);
 
             for (int i = 0; i < numParticlesAlive; i++)
             {
-                Vector3 toCenter = allParticles[i].position - sphereCenter;
+                Vector3 toCenter = allParticles[i].position - _sphereCenter;
                 float distance = toCenter.magnitude;
 
-                if (distance > sphereRadius)
+                if (distance > _sphereRadius)
                 {
-                    // Генерация случайного направления и скорости для частицы
                     Vector3 randomDirection = Random.insideUnitSphere;
                     float randomSpeed = Random.Range(5f, 10f);
                     allParticles[i].velocity = randomDirection * randomSpeed;
                 }
             }
 
-            particles.SetParticles(allParticles, numParticlesAlive);
+            _particles.SetParticles(allParticles, numParticlesAlive);
         }
 
-        void ApplyRepulsion()
+        private void ApplyRepulsion()
         {
-            ParticleSystem.Particle[] allParticles = new ParticleSystem.Particle[particles.particleCount];
-            int numParticlesAlive = particles.GetParticles(allParticles);
+            ParticleSystem.Particle[] allParticles = new ParticleSystem.Particle[_particles.particleCount];
+            int numParticlesAlive = _particles.GetParticles(allParticles);
 
             for (int i = 0; i < numParticlesAlive; i++)
             {
-                Vector3 toCenter = allParticles[i].position - sphereCenter;
+                Vector3 toCenter = allParticles[i].position - _sphereCenter;
                 float distance = toCenter.magnitude;
 
-                if (distance > sphereRadius - 1.0f)
+                if (distance > _sphereRadius - 1.0f)
                 {
-                    allParticles[i].velocity -= toCenter.normalized * repulsionForce;
+                    allParticles[i].velocity -= toCenter.normalized * _repulsionForce;
                 }
             }
 
-            particles.SetParticles(allParticles, numParticlesAlive);
+            _particles.SetParticles(allParticles, numParticlesAlive);
         }
 
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(sphereCenter, sphereRadius);
+            Gizmos.DrawWireSphere(_sphereCenter, _sphereRadius);
         }
     }
 }

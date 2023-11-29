@@ -169,10 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac332e39fd5a7b40859350f3411a618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereCenter: {x: 0, y: 0, z: 0}
-  sphereRadius: 100
-  repulsionForce: 0
-  maxParticles: 100000
+  _sphereCenter: {x: 0, y: 0, z: 0}
+  _sphereRadius: 100
+  _repulsionForce: 0
+  _maxParticles: 100000
 --- !u!199 &996689222
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -502,7 +502,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       scalar: 1
-      minScalar: 1
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
